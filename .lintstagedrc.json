@@ -1,0 +1,4 @@
+{
+	"{src,apps,libs,test}/**/*.ts": ["biome check --write"],
+	"package.json": ["npx -y sort-package-json"]
+}
