@@ -34,7 +34,8 @@ export class UserController {
 	@UseGuards(JwtGuard)
 	@Get(":id")
 	async findUserActivity(@Param() param: { id: string }) {
-		return await this.userService.execute(param.id);
+		const user = await this.userService.execute(param.id);
+		return user;
 	}
 
 	@UseGuards(JwtGuard)
