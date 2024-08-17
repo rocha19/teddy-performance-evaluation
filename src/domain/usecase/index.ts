@@ -4,6 +4,8 @@ export * from "./create-user";
 export * from "./update-user";
 export * from "./find-user";
 export * from "./delete-user";
+export * from "./update-short-url";
+export * from "./delete-short-url";
 export * from "./new-short-url-authenticated";
 export * from "./new-short-url-unauthenticated";
 export * from "./access-short-url-authenticated";
