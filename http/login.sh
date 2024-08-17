@@ -1,11 +1,11 @@
 #!/bin/bash
 
-## POST Login
-URL="http://localhost:8080/login"
+### INFO: POST Login
+URL="http://localhost:8080/api/login"
 
 DATA='{
-  "email": "john@example.com",
-  "password": "secret"
+  "email": "johndoe@email.com",
+  "password": "123456"
 }'
 
 RESPONSE=$(curl -s -o /dev/stderr -w "%{http_code}" -X POST "$URL" \
