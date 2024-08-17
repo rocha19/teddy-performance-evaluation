@@ -1,4 +1,4 @@
-import { ShortenedUrl, UpdateShortUrlByIdUseCase, User } from "@/domain";
+import { ShortenedUrl, UpdateShortUrlByIdUseCase } from "@/domain";
 import { UpdateShortenedUrlDto } from "@/interface";
 import { Injectable } from "@nestjs/common";
 
