@@ -1,15 +1,19 @@
 import {
 	AccessShotenedUrlService,
+	DeleteShortUrlService,
 	NewShotenedUrlService,
 	PrismaModule,
 	PrismaService,
 	PrismaShortenedUrlRepository,
+	UpdateShortUrlService,
 } from "@/application";
 import {
 	AccessShortUrlAuthenticatedUseCase,
 	AccessShortUrlUnauthenticatedUseCase,
+	DeleteShortUrlByIdUseCase,
 	NewShortUrlAuthenticatedUseCase,
 	NewShortUrlUnauthenticatedUseCase,
+	UpdateShortUrlByIdUseCase,
 } from "@/domain";
 import { ShotenedUrlController } from "@/interface";
 import { Module } from "@nestjs/common";
@@ -29,6 +33,8 @@ import { AuthModule } from "../auth/auth.module";
 	providers: [
 		NewShotenedUrlService,
 		AccessShotenedUrlService,
+		UpdateShortUrlService,
+		DeleteShortUrlService,
 		{
 			provide: PrismaShortenedUrlRepository,
 			useFactory: (prismaService: PrismaService) =>
@@ -45,6 +51,18 @@ import { AuthModule } from "../auth/auth.module";
 			provide: AccessShortUrlAuthenticatedUseCase,
 			useFactory: (repository: PrismaShortenedUrlRepository) =>
 				new AccessShortUrlAuthenticatedUseCase(repository),
+			inject: [PrismaShortenedUrlRepository],
+		},
+		{
+			provide: UpdateShortUrlByIdUseCase,
+			useFactory: (repository: PrismaShortenedUrlRepository) =>
+				new UpdateShortUrlByIdUseCase(repository),
+			inject: [PrismaShortenedUrlRepository],
+		},
+		{
+			provide: DeleteShortUrlByIdUseCase,
+			useFactory: (repository: PrismaShortenedUrlRepository) =>
+				new DeleteShortUrlByIdUseCase(repository),
 			inject: [PrismaShortenedUrlRepository],
 		},
 		{
