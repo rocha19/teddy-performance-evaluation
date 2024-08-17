@@ -30,6 +30,9 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
+	@IsString()
+	readonly id: string;
+
 	@IsOptional()
 	@IsEmail()
 	readonly email?: string;
