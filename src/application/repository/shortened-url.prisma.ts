@@ -14,9 +14,7 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 				shortUrl: shortenedUrl.shortUrl,
 				clickCount: shortenedUrl.clickCount,
 				userId: shortenedUrl.userId,
-				deletedAt: shortenedUrl.deletedAt
-					? new Date(shortenedUrl.deletedAt)
-					: undefined,
+				isDeleted: shortenedUrl.isDeleted && shortenedUrl.isDeleted,
 			},
 		});
 	}
@@ -61,7 +59,6 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 				clickCount: data.clickCount,
 				createdAt: data.createdAt ? new Date(data.createdAt) : undefined,
 				updatedAt: data.updatedAt ? new Date(data.updatedAt) : undefined,
-				deletedAt: data.deletedAt ? new Date(data.deletedAt) : undefined,
 			},
 		});
 	}
@@ -79,8 +76,8 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 				shortUrl: null,
 				clickCount: null,
 				createdAt: null,
-				updatedAt: null,
-				deletedAt: new Date(),
+				updatedAt: new Date(),
+				isDeleted: true,
 			},
 		});
 	}
@@ -101,9 +98,7 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 			prismaShortenedUrl.createdAt.toISOString(),
 			prismaShortenedUrl.updatedAt.toISOString(),
 			prismaShortenedUrl.userId,
-			prismaShortenedUrl.deletedAt
-				? prismaShortenedUrl.deletedAt.toISOString()
-				: undefined,
+			prismaShortenedUrl.isDeleted && prismaShortenedUrl.isDeleted,
 			prismaShortenedUrl.id,
 		);
 	}
@@ -117,5 +112,5 @@ type PrismaShortenedUrl = {
 	createdAt: Date;
 	updatedAt: Date;
 	userId?: string;
-	deletedAt?: Date;
+	isDeleted?: boolean;
 };

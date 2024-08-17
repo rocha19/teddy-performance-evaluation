@@ -30,7 +30,7 @@ export class PrismaUserRepository implements Repository<User> {
 								createdAt: new Date(url.createdAt),
 								updatedAt: new Date(url.updatedAt),
 								userId: url.userId,
-								deletedAt: url.deletedAt ? new Date(url.deletedAt) : undefined,
+								isDeleted: url.isDeleted && url.isDeleted,
 							})),
 						}
 					: undefined,
@@ -98,7 +98,7 @@ export class PrismaUserRepository implements Repository<User> {
 						url.createdAt.toISOString(),
 						url.updatedAt.toISOString(),
 						url.userId,
-						url.deletedAt ? url.deletedAt.toISOString() : undefined,
+						url.isDeleted && url.isDeleted,
 						url.id,
 					),
 			),
@@ -124,7 +124,7 @@ type PrismaUserData = {
 			createdAt: Date;
 			updatedAt: Date;
 			userId?: string;
-			deletedAt?: Date;
+			isDeleted?: boolean;
 		}[];
 	};
 };
@@ -137,7 +137,7 @@ type PrismaShortenedUrl = {
 	createdAt: Date;
 	updatedAt: Date;
 	userId?: string;
-	deletedAt?: Date;
+	isDeleted?: boolean;
 };
 
 type PrismaUser = {
