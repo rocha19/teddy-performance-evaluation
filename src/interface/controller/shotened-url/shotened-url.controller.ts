@@ -31,7 +31,7 @@ export class ShotenedUrlController {
 		private readonly deleteShortUrlService: DeleteShortUrlService,
 	) {}
 
-	@Post("api/shortened-link")
+	@Post("api/shortener")
 	async generateShortUrl(
 		@Headers("authorization") authHeader: string,
 		@Body() data: FullUrlDto,
@@ -61,7 +61,7 @@ export class ShotenedUrlController {
 	}
 
 	@UseGuards(JwtGuard)
-	@Patch(":id")
+	@Patch("api/shortener/:id")
 	async update(
 		@Param() param: ParamDTO,
 		@Body() shortUrl: UpdateShortenedUrlDto,
@@ -70,7 +70,7 @@ export class ShotenedUrlController {
 	}
 
 	@UseGuards(JwtGuard)
-	@Delete(":id/:urlId")
+	@Delete("api/shortener/:id/:urlId")
 	async delete(@Param() param: ParamDTO) {
 		return await this.deleteShortUrlService.execute(param.id, param.urlId);
 	}

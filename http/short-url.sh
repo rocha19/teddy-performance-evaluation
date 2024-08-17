@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### INFO: Shorten your URL
-URL="http://localhost:8080/api/shortened-link"
+URL="http://localhost:8080/api/shortener"
 LOGIN_URL="http://localhost:8080/api/login"
 
 DATA='{
