@@ -1,7 +1,9 @@
 import {
 	AccessShotenedUrlService,
+	DeleteShortUrlService,
 	JwtGuard,
 	NewShotenedUrlService,
+	UpdateShortUrlService,
 } from "@/application";
 import { UpdateShortenedUrlDto } from "@/interface/dto";
 import { FullUrlDto } from "@/interface/dto/full-url";
@@ -60,13 +62,16 @@ export class ShotenedUrlController {
 
 	@UseGuards(JwtGuard)
 	@Patch(":id")
-	async update(@Param() param: ParamDTO, @Body() user: UpdateShortenedUrlDto) {
-		return await this.updateShortUrlService.execute(param.id, user);
+	async update(
+		@Param() param: ParamDTO,
+		@Body() shortUrl: UpdateShortenedUrlDto,
+	) {
+		return await this.updateShortUrlService.execute(param.id, shortUrl);
 	}
 
 	@UseGuards(JwtGuard)
-	@Delete(":id")
+	@Delete(":id/:urlId")
 	async delete(@Param() param: ParamDTO) {
-		return await this.deleteShortUrlService.execute(param.id);
+		return await this.deleteShortUrlService.execute(param.id, param.urlId);
 	}
 }
