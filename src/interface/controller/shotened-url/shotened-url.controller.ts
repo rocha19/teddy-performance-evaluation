@@ -1,14 +1,22 @@
-import { AccessShotenedUrlService, NewShotenedUrlService } from "@/application";
+import {
+	AccessShotenedUrlService,
+	JwtGuard,
+	NewShotenedUrlService,
+} from "@/application";
+import { UpdateShortenedUrlDto } from "@/interface/dto";
 import { FullUrlDto } from "@/interface/dto/full-url";
 import { ParamDTO } from "@/interface/dto/params";
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Headers,
 	Param,
+	Patch,
 	Post,
 	Res,
+	UseGuards,
 } from "@nestjs/common";
 import { Response } from "express";
 
@@ -17,6 +25,8 @@ export class ShotenedUrlController {
 	constructor(
 		private readonly newShotenedUrlService: NewShotenedUrlService,
 		private readonly accessShotenedUrlService: AccessShotenedUrlService,
+		private readonly updateShortUrlService: UpdateShortUrlService,
+		private readonly deleteShortUrlService: DeleteShortUrlService,
 	) {}
 
 	@Post("api/shortened-link")
@@ -46,5 +56,17 @@ export class ShotenedUrlController {
 			params.code,
 		);
 		return res.redirect(url);
+	}
+
+	@UseGuards(JwtGuard)
+	@Patch(":id")
+	async update(@Param() param: ParamDTO, @Body() user: UpdateShortenedUrlDto) {
+		return await this.updateShortUrlService.execute(param.id, user);
+	}
+
+	@UseGuards(JwtGuard)
+	@Delete(":id")
+	async delete(@Param() param: ParamDTO) {
+		return await this.deleteShortUrlService.execute(param.id);
 	}
 }
