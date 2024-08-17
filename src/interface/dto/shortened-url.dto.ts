@@ -1,4 +1,10 @@
-import { IsDate, IsNumber, IsOptional, IsString } from "class-validator";
+import {
+	IsDate,
+	IsNumber,
+	IsOptional,
+	IsString,
+	IsUUID,
+} from "class-validator";
 
 export class CreateShortenedUrlDto {
 	@IsString()
@@ -26,6 +32,10 @@ export class CreateShortenedUrlDto {
 }
 
 export class UpdateShortenedUrlDto {
+	@IsUUID()
+	@IsString()
+	readonly id: string;
+
 	@IsOptional()
 	@IsString()
 	readonly originalUrl?: string;
@@ -48,6 +58,7 @@ export class UpdateShortenedUrlDto {
 }
 
 export class ShortenedUrlDto {
+	@IsUUID()
 	@IsString()
 	readonly id: string;
 

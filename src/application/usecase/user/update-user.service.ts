@@ -5,8 +5,8 @@ import { Injectable } from "@nestjs/common";
 @Injectable()
 export class UpdateUserService {
 	constructor(private updateUserById: UpdateUserByIdUseCase) {}
-	async execute(user: UpdateUserDto): Promise<void> {
-		const userInstance = new User(user.email, user.password, user.shortenedUrl);
-		await this.updateUserById.execute(user.id, userInstance);
+	async execute(userId: string, user: UpdateUserDto): Promise<void> {
+		const userInstance = new User(user.email, user.password);
+		await this.updateUserById.execute(userId, userInstance);
 	}
 }

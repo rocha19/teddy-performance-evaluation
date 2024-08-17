@@ -4,6 +4,7 @@ import {
 	IsEmail,
 	IsOptional,
 	IsString,
+	IsUUID,
 	Max,
 	Min,
 } from "class-validator";
@@ -30,9 +31,6 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
-	@IsString()
-	readonly id: string;
-
 	@IsOptional()
 	@IsEmail()
 	readonly email?: string;
@@ -42,13 +40,10 @@ export class UpdateUserDto {
 	@IsOptional()
 	@IsString()
 	readonly password?: string;
-
-	@IsOptional()
-	@IsArray()
-	readonly shortenedUrl?: ShortenedUrlDto[];
 }
 
 export class UserDto {
+	@IsUUID()
 	@IsString()
 	readonly id: string;
 

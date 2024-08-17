@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### INFO: Access Original URL by Shortened URL
-DOMAIN="http://localhost:8080"
+DOMAIN="http://localhost:8080/api"
 LOGIN_URL="http://localhost:8080/api/login"
 PARAM_CODE="otemco"
 

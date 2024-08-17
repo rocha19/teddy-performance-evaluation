@@ -6,6 +6,7 @@ import {
 	UserService,
 } from "@/application";
 import { CreateUserDto, UpdateUserDto } from "@/interface/dto";
+import { ParamDTO } from "@/interface/dto/params";
 import {
 	Body,
 	Controller,
@@ -33,20 +34,20 @@ export class UserController {
 
 	@UseGuards(JwtGuard)
 	@Get(":id")
-	async findUserActivity(@Param() param: { id: string }) {
+	async findUserActivity(@Param() param: ParamDTO) {
 		const user = await this.userService.execute(param.id);
 		return user;
 	}
 
 	@UseGuards(JwtGuard)
-	@Patch()
-	async update(@Body() user: UpdateUserDto) {
-		return await this.updateUserService.execute(user);
+	@Patch(":id")
+	async update(@Param() param: ParamDTO, @Body() user: UpdateUserDto) {
+		return await this.updateUserService.execute(param.id, user);
 	}
 
 	@UseGuards(JwtGuard)
 	@Delete(":id")
-	async delete(@Param() param: { id: string }) {
+	async delete(@Param() param: ParamDTO) {
 		return await this.deleteUserService.execute(param.id);
 	}
 }
