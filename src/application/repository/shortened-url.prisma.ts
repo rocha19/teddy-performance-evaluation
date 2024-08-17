@@ -45,11 +45,16 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 	}
 
 	async findByIdAndUpdate(
-		id: string,
+		userId: string,
 		data: Partial<ShortenedUrl>,
 	): Promise<void> {
 		await this.prismaService.shortenedUrl.update({
-			where: { id },
+			where: {
+				id_userId: {
+					id: data.id,
+					userId: userId,
+				},
+			},
 			data: {
 				originalUrl: data.originalUrl,
 				shortUrl: data.shortUrl,
@@ -61,9 +66,22 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 		});
 	}
 
-	async findByIdAndDelete(id: string): Promise<void> {
-		await this.prismaService.shortenedUrl.delete({
-			where: { id },
+	async findByIdAndDelete(userId: string, id: string): Promise<void> {
+		await this.prismaService.shortenedUrl.update({
+			where: {
+				id_userId: {
+					id: id,
+					userId: userId,
+				},
+			},
+			data: {
+				originalUrl: null,
+				shortUrl: null,
+				clickCount: null,
+				createdAt: null,
+				updatedAt: null,
+				deletedAt: new Date(),
+			},
 		});
 	}
 

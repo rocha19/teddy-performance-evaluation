@@ -25,13 +25,15 @@ model User {
 
 model ShortenedUrl {
   id          String    @id @default(uuid())
-  originalUrl String
-  shortUrl    String    @unique
-  clickCount  Int       @default(0)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  originalUrl String?
+  shortUrl    String?   @unique
+  clickCount  Int?      @default(0)
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
   userId      String
   deletedAt   DateTime?
 
   User User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([id, userId])
 }

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ### INFO: Delete user
-USER_ID="00d9fb67-e33a-47c1-a23d-80937875eedf"
-URL_ID="00d9fb67-e33a-47c1-a23d-80937875eedf"
-URL="http://localhost:8080/api/user/$USER_ID/$URL_ID"
+USER_ID="c01f53a2-f4db-47e7-977a-612f694a5bd7"
+URL_ID="6ca65f16-dfb6-4db5-83bc-4bc3fe5d65e9"
+URL="http://localhost:8080/api/shortener/$USER_ID/$URL_ID"
 LOGIN_URL="http://localhost:8080/api/login"
 
 ### INFO: Get JWT token
