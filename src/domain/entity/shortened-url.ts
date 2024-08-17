@@ -1,14 +1,36 @@
+import { DateTime, Id, Url } from "../utils";
+
 export class ShortenedUrl {
 	constructor(
 		public readonly originalUrl: string,
 		public readonly shortUrl: string,
 		public readonly clickCount?: number,
-		public readonly userId?: string,
-		public readonly createdAt?: string,
-		public readonly updatedAt?: string,
-		public readonly isDeleted?: boolean,
-		public readonly id?: string,
-	) {}
+		public readonly userId?: string | undefined,
+		public readonly createdAt?: string | undefined,
+		public readonly updatedAt?: string | undefined,
+		public readonly isDeleted?: boolean | undefined,
+		public readonly id?: string | undefined,
+	) {
+		if (!Url.register(originalUrl)) {
+			throw new Error("Invalid original URL");
+		}
+
+		if (!Url.register(shortUrl)) {
+			throw new Error("Invalid short URL");
+		}
+
+		if (createdAt && !DateTime.register(createdAt)) {
+			throw new Error("Invalid createdAt");
+		}
+
+		if (updatedAt && !DateTime.register(updatedAt)) {
+			throw new Error("Invalid updatedAt");
+		}
+
+		if (id && !Id.register(id)) {
+			throw new Error("Invalid id");
+		}
+	}
 }
 
 /*

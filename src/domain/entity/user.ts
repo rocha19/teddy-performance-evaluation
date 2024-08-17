@@ -1,3 +1,4 @@
+import { DateTime, Email, Id, Password, Url } from "../utils";
 import { ShortenedUrl } from "./shortened-url";
 
 export class User {
@@ -5,16 +6,35 @@ export class User {
 		public readonly email: string,
 		private _password: string,
 		public readonly shortenedUrl: ShortenedUrl[] = [],
-		public readonly createdAt?: string,
-		public readonly updatedAt?: string,
-		public readonly id?: string,
-	) {}
+		public readonly createdAt?: string | undefined,
+		public readonly updatedAt?: string | undefined,
+		public readonly id?: string | undefined,
+	) {
+		if (!Email.register(email)) {
+			throw new Error("Invalid email");
+		}
+
+		if (createdAt && !DateTime.register(createdAt)) {
+			throw new Error("Invalid createdAt");
+		}
+
+		if (updatedAt && !DateTime.register(updatedAt)) {
+			throw new Error("Invalid updatedAt");
+		}
+
+		if (id && !Id.register(id)) {
+			throw new Error("Invalid id");
+		}
+	}
 
 	get password(): string {
 		return this._password;
 	}
 
 	set password(newPassword: string) {
+		if (!Password.register(newPassword)) {
+			throw new Error("Invalid password");
+		}
 		this._password = newPassword;
 	}
 }
