@@ -1,3 +1,4 @@
-export * from "./auth";
-export * from "./user";
-export * from "./shotened-url";
+export * from "./auth.controller";
+export * from "./user.controller";
+export * from "./shotened-url.controller";
+export * from "./healthchecker.controller";

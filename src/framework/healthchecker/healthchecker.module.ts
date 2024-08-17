@@ -1,5 +1,5 @@
 import { HealthcheckerService } from "@/application/usecase/healthchecker/healthchecker.service";
-import { HealthcheckerController } from "@/interface/controller/healthchecker/healthchecker.controller";
+import { HealthcheckerController } from "@/interface";
 import { Module } from "@nestjs/common";
 
 @Module({
