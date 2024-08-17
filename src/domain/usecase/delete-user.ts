@@ -5,6 +5,6 @@ export class DeleteUserByIdUseCase {
 	constructor(private repository: Repository<User>) {}
 
 	async execute(userId: string): Promise<void> {
-		await this.repository.findById(userId);
+		await this.repository.findByIdAndDelete(userId);
 	}
 }
