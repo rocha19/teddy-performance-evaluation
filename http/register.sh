@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ### INFO: POST Register a new user
-URL="http://localhost:8080/api/register"
+URL="http://localhost:8080/api/user"
 
 DATA='{
-  "email": "johndoe@email.com",
+  "email": "johndoe@gmail.com",
   "password": "123456"
 }'
 
