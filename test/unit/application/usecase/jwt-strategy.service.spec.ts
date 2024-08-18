@@ -4,6 +4,7 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 
 describe("JwtStrategyService", () => {
 	let service: JwtStrategyService;
+	const secret = process.env.JWT_SECRET || "";
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -35,7 +36,7 @@ describe("JwtStrategyService", () => {
 				{
 					jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 					ignoreExpiration: false,
-					secretOrKey: process.env.JWT_SECRET || "6b2d51cc5769",
+					secretOrKey: secret,
 				},
 				async (payload, done) => {
 					return done(null, payload);
