@@ -1,7 +1,6 @@
 import {
 	DeleteUserService,
 	NewUserService,
-	PrismaModule,
 	PrismaService,
 	PrismaUserRepository,
 	UpdateUserService,
@@ -16,6 +15,7 @@ import {
 import { UserController } from "@/interface";
 import { Module } from "@nestjs/common";
 import { AuthModule } from "../auth/auth.module";
+import { PrismaModule } from "../prisma/prisma.module";
 
 @Module({
 	imports: [AuthModule, PrismaModule],

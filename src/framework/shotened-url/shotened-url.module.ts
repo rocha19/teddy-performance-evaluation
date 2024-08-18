@@ -2,7 +2,6 @@ import {
 	AccessShotenedUrlService,
 	DeleteShortUrlService,
 	NewShotenedUrlService,
-	PrismaModule,
 	PrismaService,
 	PrismaShortenedUrlRepository,
 	UpdateShortUrlService,
@@ -19,6 +18,7 @@ import { ShotenedUrlController } from "@/interface";
 import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { AuthModule } from "../auth/auth.module";
+import { PrismaModule } from "../prisma/prisma.module";
 
 @Module({
 	imports: [

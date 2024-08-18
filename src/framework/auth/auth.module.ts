@@ -2,7 +2,6 @@ import {
 	AuthService,
 	JwtServiceAdapter,
 	JwtStrategyService,
-	PrismaModule,
 	PrismaService,
 	PrismaUserRepository,
 } from "@/application";
@@ -11,6 +10,7 @@ import { Login } from "@/domain/usecase/login";
 import { AuthController } from "@/interface";
 import { Module } from "@nestjs/common";
 import { JwtModule, JwtService } from "@nestjs/jwt";
+import { PrismaModule } from "../prisma/prisma.module";
 
 @Module({
 	imports: [
