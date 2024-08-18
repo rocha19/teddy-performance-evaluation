@@ -29,7 +29,7 @@ export class NewShotenedUrlService {
 			);
 		} catch (error) {
 			console.error("Invalid or expired token:", error.message);
-			throw new Error("Invalid or expired token");
+			return await this.shortenedUrlUnauthenticated.execute(data.url);
 		}
 	}
 }
