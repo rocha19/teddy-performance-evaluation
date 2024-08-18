@@ -1,4 +1,4 @@
-import { DateTime, Email, Id, Password, Url } from "../utils";
+import { DateTime, Email, Id, Password } from "../utils";
 import { ShortenedUrl } from "./shortened-url";
 
 export class User {
