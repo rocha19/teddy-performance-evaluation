@@ -10,19 +10,19 @@ export class User {
 		public readonly updatedAt?: string | undefined,
 		public readonly id?: string | undefined,
 	) {
-		if (!Email.register(email)) {
+		if (!Email.validator(email)) {
 			throw new Error("Invalid email");
 		}
 
-		if (createdAt && !DateTime.register(createdAt)) {
+		if (createdAt && !DateTime.validator(createdAt)) {
 			throw new Error("Invalid createdAt");
 		}
 
-		if (updatedAt && !DateTime.register(updatedAt)) {
+		if (updatedAt && !DateTime.validator(updatedAt)) {
 			throw new Error("Invalid updatedAt");
 		}
 
-		if (id && !Id.register(id)) {
+		if (id && !Id.validator(id)) {
 			throw new Error("Invalid id");
 		}
 	}
@@ -32,7 +32,7 @@ export class User {
 	}
 
 	set password(newPassword: string) {
-		if (!Password.register(newPassword)) {
+		if (!Password.validator(newPassword)) {
 			throw new Error("Invalid password");
 		}
 		this._password = newPassword;

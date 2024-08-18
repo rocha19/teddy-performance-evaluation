@@ -11,23 +11,23 @@ export class ShortenedUrl {
 		public readonly isDeleted?: boolean | undefined,
 		public readonly id?: string | undefined,
 	) {
-		if (!Url.register(originalUrl)) {
+		if (!Url.validator(originalUrl)) {
 			throw new Error("Invalid original URL");
 		}
 
-		if (!Url.register(shortUrl)) {
+		if (!Url.validator(shortUrl)) {
 			throw new Error("Invalid short URL");
 		}
 
-		if (createdAt && !DateTime.register(createdAt)) {
+		if (createdAt && !DateTime.validator(createdAt)) {
 			throw new Error("Invalid createdAt");
 		}
 
-		if (updatedAt && !DateTime.register(updatedAt)) {
+		if (updatedAt && !DateTime.validator(updatedAt)) {
 			throw new Error("Invalid updatedAt");
 		}
 
-		if (id && !Id.register(id)) {
+		if (id && !Id.validator(id)) {
 			throw new Error("Invalid id");
 		}
 	}
