@@ -12,6 +12,7 @@ import {
 	Controller,
 	Delete,
 	Get,
+	HttpCode,
 	Param,
 	Patch,
 	Post,
@@ -39,12 +40,14 @@ export class UserController {
 		return user;
 	}
 
+	@HttpCode(204)
 	@UseGuards(JwtGuard)
 	@Patch(":id")
 	async update(@Param() param: ParamDTO, @Body() user: UpdateUserDto) {
 		return await this.updateUserService.execute(param.id, user);
 	}
 
+	@HttpCode(204)
 	@UseGuards(JwtGuard)
 	@Delete(":id")
 	async delete(@Param() param: ParamDTO) {

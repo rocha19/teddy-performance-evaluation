@@ -14,6 +14,7 @@ import {
 	Delete,
 	Get,
 	Headers,
+	HttpCode,
 	Param,
 	Patch,
 	Post,
@@ -60,6 +61,7 @@ export class ShotenedUrlController {
 		return res.redirect(url);
 	}
 
+	@HttpCode(204)
 	@UseGuards(JwtGuard)
 	@Patch("api/shortener/:id")
 	async update(
@@ -69,6 +71,7 @@ export class ShotenedUrlController {
 		return await this.updateShortUrlService.execute(param.id, shortUrl);
 	}
 
+	@HttpCode(204)
 	@UseGuards(JwtGuard)
 	@Delete("api/shortener/:id/:urlId")
 	async delete(@Param() param: ParamDTO) {
