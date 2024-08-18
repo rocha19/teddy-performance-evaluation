@@ -17,6 +17,12 @@ export class Password {
 		if (!password) {
 			return false;
 		}
+		const trimmedPassword = password.trim();
+		const bcryptHashPattern = /^\$2[aby]\$\d{2}\$.{53}$/;
+		if (bcryptHashPattern.test(trimmedPassword)) {
+			return true;
+		}
+
 		if (password.trim().length < 6 || password.trim().length > 20) {
 			return false;
 		}
