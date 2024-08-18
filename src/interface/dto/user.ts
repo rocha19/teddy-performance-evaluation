@@ -5,8 +5,8 @@ import {
 	IsOptional,
 	IsString,
 	IsUUID,
-	Max,
-	Min,
+	MaxLength,
+	MinLength,
 } from "class-validator";
 import { ShortenedUrlDto } from "./shortened-url.dto";
 
@@ -14,8 +14,8 @@ export class CreateUserDto {
 	@IsEmail()
 	readonly email: string;
 
-	@Min(6)
-	@Max(20)
+	@MinLength(6)
+	@MaxLength(20)
 	@IsString()
 	readonly password: string;
 
@@ -35,8 +35,8 @@ export class UpdateUserDto {
 	@IsEmail()
 	readonly email?: string;
 
-	@Min(6)
-	@Max(20)
+	@MinLength(6)
+	@MaxLength(20)
 	@IsOptional()
 	@IsString()
 	readonly password?: string;

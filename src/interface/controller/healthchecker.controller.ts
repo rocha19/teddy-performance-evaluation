@@ -1,12 +1,12 @@
 import { HealthcheckerService } from "@/application/usecase/healthchecker/healthchecker.service";
 import { Controller, Get } from "@nestjs/common";
 
-@Controller("healthchecker")
+@Controller()
 export class HealthcheckerController {
 	constructor(private readonly healthcheckerService: HealthcheckerService) {}
 
 	@Get()
-	async getHello() {
+	async getApiHealth() {
 		return await this.healthcheckerService.execute();
 	}
 }
