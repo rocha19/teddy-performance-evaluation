@@ -63,7 +63,7 @@ $ yarn test:cov
 `Saída: http://localhost/aZbKq7`
 
 [x] Qualquer um pode solicitar que o URL seja encurtado e para encurtar deve existir apenas um endpoint, mas caso seja um usuário autenticado, o sistema deve registrar que o URL pertence ao usuário.
-[] Um usuário autenticado pode listar, editar o endereço de destino e excluir URLs encurtadas por ele.
+[x] Um usuário autenticado pode listar, editar o endereço de destino e excluir URLs encurtadas por ele.
 [x] Todo acesso a qualquer URL encurtado deve ser contabilizado no sistema.
 [x] Quando um usuário listar os urls deve aparecer na listagem a quantidade de cliques.
 [x] Todos os registros devem ter uma forma de saber quando foram atualizados.
@@ -77,10 +77,10 @@ $ yarn test:cov
 [x] Definir o que deve e não deve ser variável de ambiente..
 [x] Construir endpoints que aceitam apenas requisições autenticadas:
 [x] Listagem de URL Encurtados pelo usuário com contabilização de clicks
-[] Deletar URL Encurtado
-[] Atualizar a origem de um URL encurtado.
+[x] Deletar URL Encurtado
+[x] Atualizar a origem de um URL encurtado.
 [x] README ou CONTRIBUTING explicando como rodar o projeto.
-[] Construir um endpoint que ao receber um URL encurtado, redirecione o usuário para o URL de origem e contabilize.
+[x] Construir um endpoint que ao receber um URL encurtado, redirecione o usuário para o URL de origem e contabilize.
 
 ## TODO+:
 
