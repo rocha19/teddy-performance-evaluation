@@ -11,7 +11,7 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 		await this.prismaService.shortenedUrl.create({
 			data: {
 				originalUrl: shortenedUrl.originalUrl,
-				shortUrl: shortenedUrl.shortUrl,
+				shortUrl: shortenedUrl.shortUrl.split("/")[3],
 				clickCount: shortenedUrl.clickCount,
 				userId: shortenedUrl.userId,
 				isDeleted: shortenedUrl.isDeleted && shortenedUrl.isDeleted,
@@ -55,7 +55,6 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 			},
 			data: {
 				originalUrl: data.originalUrl,
-				shortUrl: data.shortUrl,
 				clickCount: data.clickCount,
 				createdAt: data.createdAt ? new Date(data.createdAt) : undefined,
 				updatedAt: data.updatedAt ? new Date(data.updatedAt) : undefined,
@@ -93,7 +92,7 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 	): ShortenedUrl {
 		return new ShortenedUrl(
 			prismaShortenedUrl.originalUrl,
-			prismaShortenedUrl.shortUrl,
+			`${process.env.DOMAIN}/${prismaShortenedUrl.shortUrl}`,
 			prismaShortenedUrl.clickCount,
 			prismaShortenedUrl.userId,
 			prismaShortenedUrl.createdAt.toISOString(),

@@ -1,4 +1,5 @@
 import {
+	IsBoolean,
 	IsDate,
 	IsNumber,
 	IsOptional,
@@ -49,12 +50,20 @@ export class UpdateShortenedUrlDto {
 	readonly clickCount?: number;
 
 	@IsOptional()
+	@IsBoolean()
+	readonly isDeleted?: boolean;
+
+	@IsOptional()
 	@IsString()
 	readonly userId?: string;
 
 	@IsOptional()
 	@IsDate()
-	readonly deletedAt?: string;
+	readonly createdAt: string;
+
+	@IsOptional()
+	@IsDate()
+	readonly updatedAt: string;
 }
 
 export class ShortenedUrlDto {
@@ -82,6 +91,6 @@ export class ShortenedUrlDto {
 	readonly userId?: string;
 
 	@IsOptional()
-	@IsDate()
-	readonly deletedAt?: string;
+	@IsBoolean()
+	readonly isDeleted?: boolean;
 }

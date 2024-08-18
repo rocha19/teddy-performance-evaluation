@@ -11,7 +11,13 @@ export class UpdateShortUrlService {
 	): Promise<void> {
 		const userInstance = new ShortenedUrl(
 			shortUrl.originalUrl,
-			shortUrl.shortUrl,
+			process.env.DOMAIN,
+			shortUrl.clickCount,
+			shortUrl.userId,
+			shortUrl.createdAt,
+			shortUrl.updatedAt,
+			shortUrl.isDeleted,
+			shortUrl.id,
 		);
 		await this.updateShortUrlById.execute(userId, userInstance);
 	}

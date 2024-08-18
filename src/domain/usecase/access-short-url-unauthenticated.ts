@@ -2,15 +2,11 @@ import { ShortenedUrl } from "../entity";
 
 export class AccessShortUrlUnauthenticatedUseCase {
 	async execute(url: string): Promise<string> {
-		try {
-			const domain = "http://localhost:8080";
-			const code = this.generateCode();
-			const shortenedUrl = `${domain}/${code}`;
-			const shortenedUrlEntity = new ShortenedUrl(url, shortenedUrl);
-			return shortenedUrl;
-		} catch (error) {
-			throw new Error(`Error creating user: ${error.message}`);
-		}
+		const domain = "http://localhost:8080";
+		const code = this.generateCode();
+		const shortenedUrl = `${domain}/${code}`;
+		// const shortenedUrlEntity = new ShortenedUrl(url, shortenedUrl);
+		return shortenedUrl;
 	}
 	private generateCode() {
 		let text = "";

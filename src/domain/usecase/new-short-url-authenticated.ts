@@ -5,18 +5,14 @@ export class NewShortUrlAuthenticatedUseCase {
 	constructor(private repository: Repository<ShortenedUrl>) {}
 
 	async execute(userId: string, originalUrl: string): Promise<string> {
-		try {
-			const domain = process.env.DOMAIN || "";
-			const code = this.generateCode();
-			const shortUrl = `${domain}/${code}`;
-			const newShortUrl = new ShortenedUrl(originalUrl, code, 0, userId);
+		const domain = process.env.DOMAIN || "";
+		const code = this.generateCode();
+		const shortUrl = `${domain}/${code}`;
+		const newShortUrl = new ShortenedUrl(originalUrl, shortUrl, 0, userId);
 
-			await this.repository.create(newShortUrl);
+		await this.repository.create(newShortUrl);
 
-			return shortUrl;
-		} catch (error) {
-			throw new Error(`Error creating user: ${error.message}`);
-		}
+		return shortUrl;
 	}
 	private generateCode() {
 		let text = "";

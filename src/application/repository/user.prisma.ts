@@ -93,7 +93,7 @@ export class PrismaUserRepository implements Repository<User> {
 				(url) =>
 					new ShortenedUrl(
 						url.originalUrl,
-						url.shortUrl,
+						`${process.env.DOMAIN}/${url.shortUrl}`,
 						url.clickCount,
 						url.userId,
 						url.createdAt.toISOString(),

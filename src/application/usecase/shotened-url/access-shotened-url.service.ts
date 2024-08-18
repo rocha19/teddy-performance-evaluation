@@ -16,17 +16,12 @@ export class AccessShotenedUrlService {
 			new AccessShortUrlUnauthenticatedUseCase();
 	}
 	async execute(jwtToken: string, code: string) {
-		try {
-			const token = jwtToken.split(" ")[1];
-			const decodedToken: Payload = this.jwtService.verify(token);
-			if (!decodedToken) {
-				return await this.shortenedUrlUnauthenticated.execute(code);
-			}
-			return await this.shortenedUrlAuthenticated.execute(code);
-		} catch (error) {
-			console.error("Invalid or expired token:", error.message);
+		const token = jwtToken.split(" ")[1];
+		const decodedToken: Payload = this.jwtService.verify(token);
+		if (!decodedToken) {
 			return await this.shortenedUrlUnauthenticated.execute(code);
 		}
+		return await this.shortenedUrlAuthenticated.execute(code);
 	}
 }
 
