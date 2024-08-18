@@ -14,5 +14,8 @@ module.exports = {
     "^@test/(.*)$": "<rootDir>/test/$1",
   },
   testTimeout: 60000,
-  watchPathIgnorePatterns: ["**/node_modules/**", "**/dist/**", "**/temp/**"],
+  watchPathIgnorePatterns: ["/node_modules/", "/dist/", "/temp/"],
+  transform: {
+    "^.+\\.(ts|tsx)$": "ts-jest",
+  },
 };
