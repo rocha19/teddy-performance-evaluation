@@ -11,7 +11,7 @@ export class User {
 		public readonly id?: string | undefined,
 	) {
 		if (!Email.validator(email)) {
-			throw new Error("Invalid email");
+			throw new Error("Invalid email or password");
 		}
 
 		if (createdAt && !DateTime.validator(createdAt)) {
@@ -33,7 +33,7 @@ export class User {
 
 	set password(newPassword: string) {
 		if (!Password.validator(newPassword)) {
-			throw new Error("Invalid password");
+			throw new Error("Invalid email or password");
 		}
 		this._password = newPassword;
 	}
