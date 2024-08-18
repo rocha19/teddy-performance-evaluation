@@ -1,5 +1,5 @@
 import { Repository, ShortenedUrl } from "@/domain";
-import { PrismaService } from "../prisma";
+import { PrismaService } from "../usecase";
 
 export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 	constructor(private prismaService: PrismaService) {}
