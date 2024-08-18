@@ -1,10 +1,10 @@
 import {
 	DeleteUserService,
+	GetUserService,
 	NewUserService,
 	PrismaService,
 	PrismaUserRepository,
 	UpdateUserService,
-	UserService,
 } from "@/application";
 import {
 	CreateUserUseCase,
@@ -21,7 +21,7 @@ import { PrismaModule } from "../prisma/prisma.module";
 	imports: [AuthModule, PrismaModule],
 	controllers: [UserController],
 	providers: [
-		UserService,
+		GetUserService,
 		NewUserService,
 		UpdateUserService,
 		DeleteUserService,

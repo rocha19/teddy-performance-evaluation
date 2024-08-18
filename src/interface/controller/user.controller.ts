@@ -1,9 +1,9 @@
 import {
 	DeleteUserService,
+	GetUserService,
 	JwtGuard,
 	NewUserService,
 	UpdateUserService,
-	UserService,
 } from "@/application";
 import { CreateUserDto, UpdateUserDto } from "@/interface/dto";
 import { ParamDTO } from "@/interface/dto/params";
@@ -22,7 +22,7 @@ import {
 @Controller("api/user")
 export class UserController {
 	constructor(
-		private readonly userService: UserService,
+		private readonly userService: GetUserService,
 		private readonly newUserService: NewUserService,
 		private readonly updateUserService: UpdateUserService,
 		private readonly deleteUserService: DeleteUserService,
