@@ -1,5 +1,5 @@
 import { Repository, ShortenedUrl, User } from "@/domain";
-import { PrismaService } from "../prisma";
+import { PrismaService } from "../usecase";
 
 export class PrismaUserRepository implements Repository<User> {
 	constructor(private prismaService: PrismaService) {}
@@ -95,9 +95,9 @@ export class PrismaUserRepository implements Repository<User> {
 						url.originalUrl,
 						url.shortUrl,
 						url.clickCount,
+						url.userId,
 						url.createdAt.toISOString(),
 						url.updatedAt.toISOString(),
-						url.userId,
 						url.isDeleted && url.isDeleted,
 						url.id,
 					),

@@ -95,9 +95,9 @@ export class PrismaShortenedUrlRepository implements Repository<ShortenedUrl> {
 			prismaShortenedUrl.originalUrl,
 			prismaShortenedUrl.shortUrl,
 			prismaShortenedUrl.clickCount,
+			prismaShortenedUrl.userId,
 			prismaShortenedUrl.createdAt.toISOString(),
 			prismaShortenedUrl.updatedAt.toISOString(),
-			prismaShortenedUrl.userId,
 			prismaShortenedUrl.isDeleted && prismaShortenedUrl.isDeleted,
 			prismaShortenedUrl.id,
 		);
