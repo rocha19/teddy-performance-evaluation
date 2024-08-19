@@ -5,10 +5,19 @@
 ## Installation
 
 ```bash
+#
 $ npm install
 $ bun install
-& pnpm install
+$ pnpm install
 $ yarm install
+```
+
+## DOCS
+
+```
+# The documentation is available in the route:
+
+/api
 ```
 
 ## Running the app
@@ -16,15 +25,14 @@ $ yarm install
 ```bash
 # production mode
 $ npm run start
-$ bun run start
-$ pnpm run start
-$ yarn start
 
 # watch mode
 $ npm run dev
-$ bun run dev
-$ pnpm run dev
-$ yarn dev
+
+# docker or podman
+
+docker-compose up -d
+podman-compose up -d
 
 ```
 
@@ -33,21 +41,12 @@ $ yarn dev
 ```bash
 # unit tests
 $ npm run test
-$ bun run test
-$ pnpm run test
-$ yarn test
 
 # e2e tests
 $ npm run test:e2e
-$ bun run test:e2e
-$ pnpm run test:e2e
-$ yarn test:e2e
 
 # test coverage
 $ npm run test:cov
-$ bun run test:cov
-$ pnpm run test:cov
-$ yarn test:cov
 ```
 
 ## Stay in touch
@@ -56,100 +55,53 @@ $ yarn test:cov
 
 ## TODO:
 
-[✓] Deverá ser implementado um projeto com NodeJS na última versão estável, sendo construído como API REST. Leve em consideração que o sistema será implementado em uma infraestrutura que escala verticalmente.
-
-[✓] O sistema deve possibilitar o cadastro de usuários e autenticação dos mesmos.
-
-[✓] O sistema deve possibilitar que a partir de um url enviado, ele seja encurtado para no máximo 6 caracteres. Exemplo:
-`Entrada: https://teddy360.com.br/material/marco-legal-das-garantias-sancionado-entenda-o-que-muda/`
-`Saída: http://localhost/aZbKq7`
-
-[✓] Qualquer um pode solicitar que o URL seja encurtado e para encurtar deve existir apenas um endpoint, mas caso seja um usuário autenticado, o sistema deve registrar que o URL pertence ao usuário.
-
-[✓] Um usuário autenticado pode listar, editar o endereço de destino e excluir URLs encurtadas por ele.
-
-[✓] Todo acesso a qualquer URL encurtado deve ser contabilizado no sistema.
-
-[✓] Quando um usuário listar os urls deve aparecer na listagem a quantidade de cliques.
-
-[✓] Todos os registros devem ter uma forma de saber quando foram atualizados.
-
-[✓] Os registros só poderão ser deletados logicamente do banco, ou seja, deverá ter um campo que guarda a data de exclusão do registro, caso ela esteja nula é porque ele é válido, caso esteja preenchida é porque ele foi excluído e nenhuma operação de leitura ou escrita pode ser realizada por ele.
+- [x] Implement a Node.js project using the latest stable version as a REST API, considering vertical scaling.
+- [x] Implement user registration and authentication.
+- [x] Enable URL shortening to a maximum of 6 characters. Example:
+  - Input: `https://teddy360.com.br/material/marco-legal-das-garantias-sancionado-entenda-o-que-muda/`
+  - Output: `http://localhost/aZbKq7`
+- [x] Allow anyone to request URL shortening with a single endpoint. Authenticated users should have URLs associated with their account.
+- [x] Authenticated users can list, edit, and delete their shortened URLs.
+- [x] Track all access to shortened URLs.
+- [x] Display click counts when listing URLs.
+- [x] Include update timestamps for all records.
+- [x] Soft delete records with a deletion date; null date means the record is valid.
 
 ## Details:
 
-[✓] Construir uma estrutura de tabelas que faça sentido para o projeto usando um banco relacional.
-
-[✓] Construir endpoints para autenticação de e-mail e senha que retorna um Bearer Token.
-
-[✓] Construir apenas um endpoint para encurtar o URL, ele deve receber um URL de origem e deve aceitar requisições com e sem autenticação, deve retornar o url encurtado - incluindo o domínio..
-
-[✓] Definir o que deve e não deve ser variável de ambiente..
-
-[✓] Construir endpoints que aceitam apenas requisições autenticadas:
-
-[✓] Listagem de URL Encurtados pelo usuário com contabilização de clicks
-
-[✓] Deletar URL Encurtado
-
-[✓] Atualizar a origem de um URL encurtado.
-
-[✓] README ou CONTRIBUTING explicando como rodar o projeto.
-
-[✓] Construir um endpoint que ao receber um URL encurtado, redirecione o usuário para o URL de origem e contabilize.
+- [x] Design a sensible relational database schema.
+- [x] Create endpoints for email/password authentication that return a Bearer Token.
+- [x] Implement a single URL shortening endpoint that handles both authenticated and unauthenticated requests and returns the shortened URL including the domain.
+- [x] Define environment variables appropriately.
+- [x] Create endpoints requiring authentication for:
+  - [x] Listing shortened URLs with click counts.
+  - [x] Deleting shortened URLs.
+  - [x] Updating shortened URL destinations.
+- [x] Provide README or CONTRIBUTING documentation on running the project.
+- [x] Implement an endpoint to redirect users from a shortened URL to the original URL and track the redirection.
 
 ## TODO+:
 
-[] Utilizar docker-compose para subir o ambiente completo localmente.
-
-[✓] Ter testes unitários
-
-[] API está documentada com OPEN API ou Swagger
-
-[✓] Ter validação de entrada em todos os lugares necessários.
-
-- Ter instrumentação de observabilidade (implementação real ou abstração) de um ou vários tipos:
-
-[] Logs
-
-[-] Métricas
-
-[-] Rastreamento
-
-- Observação: Se a implementação for real, não é obrigatório que tenha no docker compose, ao rodarmos a aplicação podemos inserir as credenciais de serviços como Elastic, Sentry, Datadog, New Relic, Open Telemetry, Jagger, Prometheus e etc desde que esteja em variáveis de ambiente e uma explicação de como configurar. Também é interessante ter uma variável de ambiente que ativa ou desativa o uso da ferramenta.
-  Dar deploy no ambiente em um cloud provider e expor no readme o link.
-  Deixar no README pontos de melhoria para caso o sistema necessite escalar horizontalmente e quais serão os maiores desafios.
-
-[-] Monorepo com separação de serviços como gerenciamento de identidade e acesso e regra de negócio de encurtar URL com comunicação entre os serviços. Obrigatório docker-compose neste cenário.
-
-[-] Configurar um api gateway como KrankeD na frente dos serviços.
-[] Utilizar changelog com a realidade do seu desenvolvimento
-
-[-] Git tags definindo versões de release, por exemplo release 0.1.0 como encurtador criado, 0.2.0 como autenticação, 0.3.0 como operações de usuário no encurtador, 0.4.0 como contabilização de acessos.
-
-[-] Construir deployments do Kubernetes para deploy.
-
-[-] Construir artefatos do Terraform para deploy.
-
-[] Construir github actions para lint e testes automatizados.
-
-[] Transformar o sistema em multi tenant.
-
-[] Construir funcionalidades a mais que acredite ser interessante para o “domínio do negócio” da aplicação.
-
-[✓] Definir e assegurar quais versões do NodeJS são aceitas no projeto.
-
-[✓] Configurar pré commit ou pre push hooks.
-
-[] Código tolerante a falhas.
-
-```
-* O mesmo teste é utilizado para avaliação de todas as senioridades, então a maior partes dos diferenciais são voltados ao público mais sênior.
-* A avaliação é feita pela escrita do código, configurações da base de código, padrões de projetos, design patterns, boas práticas, commits, tags, arquitetura e tecnologias utilizadas. Levamos em consideração também quando o candidato recebe o teste e a data de entrega do teste.
-* Caso o teste não rode no ambiente local do avaliador por falta de instruções, conflito de dependências que necessite “force” na instalação ou código quebrado, impactará negativamente a avaliação.
-* O código deve estar armazenado em um repositório público preferencialmente GitHub.
-Desejamos boa sorte em seu processo!
-```
+- [x] Use Docker Compose for local environment setup.
+- [x] Write unit tests.
+- [x] Document the API with OpenAPI or Swagger.
+- [x] Validate input in all necessary places.
+- [ ] Implement observability (logs, metrics, tracing):
+  - Real implementation or abstraction with configuration through environment variables.
+- [ ] Deploy to a cloud provider and include the link in the README.
+- [ ] Add points in the README for horizontal scaling and related challenges.
+- [ ] Set up a monorepo with service separation for identity management and URL shortening with inter-service communication.
+- [ ] Configure an API gateway like KrankeD in front of services.
+- [ ] Use a changelog for development updates.
+- [ ] Define Git tags for release versions (e.g., 0.1.0 for URL shortening, 0.2.0 for authentication).
+- [ ] Create Kubernetes deployment configurations.
+- [ ] Build Terraform artifacts for deployment.
+- [ ] Set up GitHub Actions for linting and automated tests.
+- [ ] Make the system multi-tenant.
+- [x] Add additional functionalities beneficial to the application domain.
+- [x] Define and ensure compatibility with Node.js versions.
+- [x] Configure pre-commit or pre-push hooks.
+- [ ] Implement fault-tolerant code.
 
 ## License
 
