@@ -1,3 +1,4 @@
+import { FileRepository } from "@/application/repository";
 import {
 	AccessShortUrlAuthenticatedUseCase,
 	AccessShortUrlUnauthenticatedUseCase,
@@ -12,16 +13,21 @@ export class AccessShotenedUrlService {
 		private shortenedUrlAuthenticated: AccessShortUrlAuthenticatedUseCase,
 		private shortenedUrlUnauthenticated: AccessShortUrlUnauthenticatedUseCase,
 	) {
-		this.shortenedUrlUnauthenticated =
-			new AccessShortUrlUnauthenticatedUseCase();
+		const repository = new FileRepository();
+		this.shortenedUrlUnauthenticated = new AccessShortUrlUnauthenticatedUseCase(
+			repository,
+		);
 	}
 	async execute(jwtToken: string, code: string) {
-		const token = jwtToken.split(" ")[1];
-		const decodedToken: Payload = this.jwtService.verify(token);
-		if (!decodedToken) {
-			return await this.shortenedUrlUnauthenticated.execute(code);
+		if (jwtToken) {
+			const token = jwtToken.split(" ")[1];
+			const decodedToken: Payload = this.jwtService.verify(token);
+			if (!decodedToken) {
+				throw new Error(`Invalid token JWT: ${token}`);
+			}
+			return await this.shortenedUrlAuthenticated.execute(code);
 		}
-		return await this.shortenedUrlAuthenticated.execute(code);
+		return await this.shortenedUrlUnauthenticated.execute(code);
 	}
 }
 

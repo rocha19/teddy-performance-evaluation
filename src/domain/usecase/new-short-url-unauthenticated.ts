@@ -1,16 +1,16 @@
 import { ShortenedUrl } from "../entity";
+import { Repository } from "../repository";
 
 export class NewShortUrlUnauthenticatedUseCase {
+	constructor(private repository: Repository<ShortenedUrl>) {}
+
 	async execute(url: string): Promise<string> {
-		try {
-			const domain = "http://localhost:8080";
-			const code = this.generateCode();
-			const shortenedUrl = `${domain}/${code}`;
-			const shortenedUrlEntity = new ShortenedUrl(url, shortenedUrl);
-			return shortenedUrl;
-		} catch (error) {
-			throw new Error(`Error creating user: ${error.message}`);
-		}
+		const domain = process.env.DOMAIN || "";
+		const code = this.generateCode();
+		const shortenedUrl = `${domain}/${code}`;
+		const shortenedUrlEntity = new ShortenedUrl(url, shortenedUrl);
+		await this.repository.create(shortenedUrlEntity);
+		return shortenedUrl;
 	}
 	private generateCode() {
 		let text = "";

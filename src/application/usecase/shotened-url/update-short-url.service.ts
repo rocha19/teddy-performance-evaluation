@@ -11,7 +11,7 @@ export class UpdateShortUrlService {
 	): Promise<void> {
 		const userInstance = new ShortenedUrl(
 			shortUrl.originalUrl,
-			process.env.DOMAIN,
+			`${process.env.DOMAIN}/${shortUrl.shortUrl}`,
 			shortUrl.clickCount,
 			shortUrl.userId,
 			shortUrl.createdAt,

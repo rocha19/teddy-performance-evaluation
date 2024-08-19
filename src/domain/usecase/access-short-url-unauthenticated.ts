@@ -1,20 +1,11 @@
 import { ShortenedUrl } from "../entity";
+import { Repository } from "../repository";
 
 export class AccessShortUrlUnauthenticatedUseCase {
-	async execute(url: string): Promise<string> {
-		const domain = "http://localhost:8080";
-		const code = this.generateCode();
-		const shortenedUrl = `${domain}/${code}`;
-		// const shortenedUrlEntity = new ShortenedUrl(url, shortenedUrl);
-		return shortenedUrl;
-	}
-	private generateCode() {
-		let text = "";
-		const possible =
-			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		for (let i = 0; i < 6; i++) {
-			text += possible.charAt(Math.floor(Math.random() * possible.length));
-		}
-		return text;
+	constructor(private repository: Repository<ShortenedUrl>) {}
+
+	async execute(code: string): Promise<string> {
+		const { originalUrl } = await this.repository.findById(code);
+		return originalUrl;
 	}
 }

@@ -1,3 +1,4 @@
+import { FileRepository } from "@/application/repository";
 import {
 	NewShortUrlAuthenticatedUseCase,
 	NewShortUrlUnauthenticatedUseCase,
@@ -14,19 +15,23 @@ export class NewShotenedUrlService {
 		private shortenedUrlAuthenticated: NewShortUrlAuthenticatedUseCase,
 		private shortenedUrlUnauthenticated: NewShortUrlUnauthenticatedUseCase,
 	) {
-		this.shortenedUrlUnauthenticated = new NewShortUrlUnauthenticatedUseCase();
+		const repository = new FileRepository();
+		this.shortenedUrlUnauthenticated = new NewShortUrlUnauthenticatedUseCase(
+			repository,
+		);
 	}
 	async execute(jwtToken: string, data: FullUrlDto) {
 		try {
-			const token = jwtToken.split(" ")[1];
-			const decodedToken: JwtPayloadDto = this.jwtService.verify(token);
-			if (!decodedToken) {
-				return await this.shortenedUrlUnauthenticated.execute(data.url);
+			if (jwtToken) {
+				const token = jwtToken.split(" ")[1];
+				const decodedToken: JwtPayloadDto = this.jwtService.verify(token);
+
+				return await this.shortenedUrlAuthenticated.execute(
+					decodedToken.sub,
+					data.url,
+				);
 			}
-			return await this.shortenedUrlAuthenticated.execute(
-				decodedToken.sub,
-				data.url,
-			);
+			return await this.shortenedUrlUnauthenticated.execute(data.url);
 		} catch (error) {
 			console.error("Invalid or expired token:", error.message);
 			return await this.shortenedUrlUnauthenticated.execute(data.url);

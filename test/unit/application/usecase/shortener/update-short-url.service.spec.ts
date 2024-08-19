@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { UpdateShortUrlService } from "@/application";
 import { ShortenedUrl, UpdateShortUrlByIdUseCase } from "@/domain";
 import { UpdateShortenedUrlDto } from "@/interface";
@@ -31,16 +32,22 @@ describe("UpdateShortUrlService", () => {
 
 	describe("execute", () => {
 		it("should call updateShortUrlById.execute with correct parameters", async () => {
-			const userId = "user-id";
+			const userId = randomUUID();
 			const shortUrlDto: UpdateShortenedUrlDto = {
-				id: "a4a309bf-44f3-488f-9c8f-58f8f08b0a23",
+				id: randomUUID(),
 				originalUrl: "http://example.com",
-				shortUrl: "http://e.com/123456",
+				shortUrl: "123456",
 			};
 
 			const shortUrlInstance = new ShortenedUrl(
 				shortUrlDto.originalUrl,
-				shortUrlDto.shortUrl,
+				`${process.env.DOMAIN}/${shortUrlDto.shortUrl}`,
+				shortUrlDto.clickCount,
+				shortUrlDto.userId,
+				shortUrlDto.createdAt,
+				shortUrlDto.updatedAt,
+				shortUrlDto.isDeleted,
+				shortUrlDto.id,
 			);
 
 			await service.execute(userId, shortUrlDto);

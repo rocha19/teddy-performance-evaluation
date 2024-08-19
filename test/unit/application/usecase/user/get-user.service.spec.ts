@@ -1,9 +1,9 @@
-import { UserService } from "@/application";
+import { GetUserService } from "@/application";
 import { FindUserByIdUseCase, User } from "@/domain";
 import { Test, TestingModule } from "@nestjs/testing";
 
-describe("UserService", () => {
-	let service: UserService;
+describe("GetUserService", () => {
+	let service: GetUserService;
 	let findUserByIdMock: Partial<FindUserByIdUseCase>;
 
 	beforeEach(async () => {
@@ -15,12 +15,12 @@ describe("UserService", () => {
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
-				UserService,
+				GetUserService,
 				{ provide: FindUserByIdUseCase, useValue: findUserByIdMock },
 			],
 		}).compile();
 
-		service = module.get<UserService>(UserService);
+		service = module.get<GetUserService>(GetUserService);
 	});
 
 	it("should be defined", () => {

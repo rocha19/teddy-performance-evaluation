@@ -62,7 +62,7 @@ describe("PrismaUserRepository", () => {
 				{
 					id: shortenedId,
 					originalUrl: validOriginalUrl,
-					shortUrl: validShortUrl,
+					shortUrl: validShortUrl.split("/")[3],
 					clickCount: 10,
 					userId,
 					createdAt: new Date(validDateTime),
@@ -130,7 +130,7 @@ describe("PrismaUserRepository", () => {
 				{
 					id: shortenedId,
 					originalUrl: validOriginalUrl,
-					shortUrl: validShortUrl,
+					shortUrl: validShortUrl.split("/")[3],
 					clickCount: 10,
 					userId,
 					createdAt: new Date(validDateTime),
@@ -204,7 +204,7 @@ describe("PrismaUserRepository", () => {
 					{
 						id: shortenedId,
 						originalUrl: validOriginalUrl,
-						shortUrl: validShortUrl,
+						shortUrl: validShortUrl.split("/")[3],
 						clickCount: 10,
 						userId,
 						createdAt: new Date(validDateTime),
