@@ -37,9 +37,6 @@ $ npm run dev
 ## It is possible to switch from Postgresql to SqLite.
 
 ```
-
-```
-
 # In "prisma.schema":
 
 - provider: "postgresql"
@@ -49,9 +46,6 @@ $ npm run dev
 # In .env:
 
 DATABASE_URL="add sqlite filename.db"
-
-```
-
 ```
 
 ## Test
@@ -120,6 +114,7 @@ $ npm run test:cov
 - [x] Define and ensure compatibility with Node.js versions.
 - [x] Configure pre-commit or pre-push hooks.
 - [ ] Implement fault-tolerant code.
+- [x] Github actions
 
 ## License
 
