@@ -24,15 +24,33 @@ $ yarm install
 
 ```bash
 # production mode
+$ npx prisma migrate:deploy
+
 $ npm run start
 
 # watch mode
+$ npx prisma migrate:dev
 $ npm run dev
 
-# docker or podman
+```
 
-docker-compose up -d
-podman-compose up -d
+## It is possible to switch from Postgresql to SqLite.
+
+```
+
+```
+
+# In "prisma.schema":
+
+- provider: "postgresql"
+
+* provider: "sqlite"
+
+# In .env:
+
+DATABASE_URL="add sqlite filename.db"
+
+```
 
 ```
 

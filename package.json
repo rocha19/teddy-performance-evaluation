@@ -13,6 +13,8 @@
 		"debug": "nest start --debug --watch",
 		"dev": "nest start --watch",
 		"lint": "biome check --write",
+		"migrade:deploy": "prisma migrate deploy",
+		"migrade:dev": "prisma migrate dev",
 		"precommit": "lint-staged && npm run lint",
 		"prepare": "husky",
 		"prepush": "npm run test",
