@@ -21,8 +21,10 @@ import {
 	Res,
 	UseGuards,
 } from "@nestjs/common";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
+@ApiTags("Shortener URL")
 @Controller()
 export class ShotenedUrlController {
 	constructor(
@@ -33,6 +35,10 @@ export class ShotenedUrlController {
 	) {}
 
 	@Post("api/shortener")
+	@ApiResponse({
+		status: 200,
+		description: "Return a shortener url from the API.",
+	})
 	async generateShortUrl(
 		@Headers("authorization") authHeader: string,
 		@Body() data: FullUrlDto,
@@ -41,6 +47,11 @@ export class ShotenedUrlController {
 	}
 
 	@Get("api/:code")
+	@Post("api/shortener")
+	@ApiResponse({
+		status: 200,
+		description: "See original URL returned from API.",
+	})
 	async acessShortUrl(
 		@Headers("authorization") authHeader: string,
 		@Param() params: ParamDTO,
@@ -49,6 +60,10 @@ export class ShotenedUrlController {
 	}
 
 	@Get(":code")
+	@ApiResponse({
+		status: 302,
+		description: "Redirect to original URL returned from API.",
+	})
 	async accessShortUrl(
 		@Headers("authorization") authHeader: string,
 		@Param() params: ParamDTO,
@@ -64,6 +79,10 @@ export class ShotenedUrlController {
 	@HttpCode(204)
 	@UseGuards(JwtGuard)
 	@Patch("api/shortener/:id")
+	@ApiResponse({
+		status: 302,
+		description: "Update Original URL with an Authenticated User",
+	})
 	async update(
 		@Param() param: ParamDTO,
 		@Body() shortUrl: UpdateShortenedUrlDto,
@@ -74,6 +93,10 @@ export class ShotenedUrlController {
 	@HttpCode(204)
 	@UseGuards(JwtGuard)
 	@Delete("api/shortener/:id/:urlId")
+	@ApiResponse({
+		status: 302,
+		description: "Delete shortener URL with an Authenticated User",
+	})
 	async delete(@Param() param: ParamDTO) {
 		return await this.deleteShortUrlService.execute(param.id, param.urlId);
 	}
